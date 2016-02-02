@@ -1,1 +1,1 @@
-Repository containing the solution of problems from diferent web contests :)
+Repository containing the solution of problems from different web contests :)
