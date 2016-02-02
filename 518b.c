@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+char reverse(char c);
+
 int main()
 {
 	int size=2e5 +1;
@@ -12,24 +14,35 @@ int main()
 	fgets(s,sizeof(s),stdin);
 	fgets(t,sizeof(t),stdin);
 
+	int i,k;
+	int y=0;
+	int w=0;
+
+	for(i=0;i<strlen(s);i++){
+		for(k=0;strlen(t);k++){
+			if(s[i]==t[k]){
+				y++;
+				t[k]='-';
+				break;
+			}else if(s[i]==reverse(t[k])){
+				w++;
+				t[k]='-';
+				break;
+			}
+		}
+
+	}
 	
 
+	printf("%d %d",y,w);
+
 	return 0;
 }
 
-int isUpperCase(char c)
-{
-	if(c >='A' && c<='Z'){
-		return 1;
-	}
-	return 0;
-}
-
-
-char f(char c)
+char reverse(char c)
 {
 		if ('a' <= c && c <= 'z')
-			return ch - 'a' + 'A';
-		return + 32;
+			return c - 'a' + 'A';
+		return c + 32;
 }
 
