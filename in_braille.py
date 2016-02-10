@@ -1,9 +1,9 @@
-first_number_to_braille = {0:". *",1:"* .",2:"* .",3:"* *",4:"* *",5:"* .",6:"* *",7:"* *",8:"* .",9:". *"}
-second_number_to_braille = {0:"* *",1:". .",2:"* .",3:". .",4:". *",5:". *",6:"* .",7:"* *",8:"* *",9:"* ."}
+first_number_to_braille = {0:".*",1:"*.",2:"*.",3:"**",4:"**",5:"*.",6:"**",7:"**",8:"*.",9:".*"}
+second_number_to_braille = {0:"**",1:"..",2:"*.",3:"..",4:".*",5:".*",6:"*.",7:"**",8:"**",9:"*."}
 
 braille_to_number = {".***..":0,"*.....":1,"*.*...":2,"**....":3,"**.*..":4,"*..*..":5,"***...":6,"****..":7,"*.**..":8,".**...":9}
 
-word=[]
+word={}
 
 
 d = int(raw_input())
@@ -14,38 +14,45 @@ while(d != 0):
 		number = int(raw_input())
 		for i in str(number):
 			result+=(first_number_to_braille[int(i)])
-			if(i < len(str(number))-1):
+			if(int(i) < len(str(number))):
 				result+=" "
+		if(result[len(result)-1]==" "):
+			result=result[:len(result)-1]
 		result+="\n"
 
 		for i in str(number):
 			result+=(second_number_to_braille[int(i)])
-			if(i < len(str(number))-1):
+			if(int(i) < len(str(number))):
 				result+=" "
+		if(result[len(result)-1]==" "):
+			result=result[:len(result)-1]
 		result+="\n"
 
 		for i in str(number):
-			result+=". ."
-			if(i < len(str(number))-1):
+			result+=".."
+			if(int(i) < len(str(number))):
 				result+=" "
+		if(result[len(result)-1]==" "):
+			result=result[:len(result)-1]
 
 	else:
 		digit = ""
 		for i in range(3):
-			j=i
+			j=0
 			line = raw_input().split()
 			for k in range(len(line)):
-				word.insert(j,line[k])
+				if(word.has_key(j)):
+					word[j] = word[j]+line[k]
+				else:
+					word[j] = line[k]
 				j+=3
 
-		for i in range(len(word)):
-			if(i%3 == 0 and i!=0):
-				result+=str(braille_to_number.get(digit))
-				digit=word[i]
-			else:
-				digit+=word[i]
-
-	print result
+		for i in word.keys():
+			result+=str(braille_to_number.get(word[i]))
+	if(result.isdigit()):
+		print int(result)
+	else:
+		print result
 	d = int(raw_input())
 
 
