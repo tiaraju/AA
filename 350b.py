@@ -3,7 +3,6 @@ objects = raw_input().split()
 path = raw_input().split()
 hotels=[]
 tracks = {}
-reverse_track = {}
 maximum_path=[]
 exists = list([x for x in path if path.count(x)>1])
 
@@ -16,11 +15,6 @@ for i in range(len(path)):
 				tracks.setdefault(i+1,[]).append(path[i])
 			else:
 				tracks.setdefault(i+1,[])
-
-		if(reverse_track.has_key(path[i])):
-			reverse_track[path[i]].append(i+1)
-		else:
-			reverse_track.setdefault(path[i],[]).append(i+1)
 
 for i in range(len(objects)):
 	if(objects[i]=='1'):
